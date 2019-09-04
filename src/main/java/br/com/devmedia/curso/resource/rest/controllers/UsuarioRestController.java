@@ -20,6 +20,7 @@ import br.com.devmedia.curso.services.UsuarioInterfaceService;
                 consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class UsuarioRestController {
 
+    
     @Autowired
     private UsuarioInterfaceService service;
     
