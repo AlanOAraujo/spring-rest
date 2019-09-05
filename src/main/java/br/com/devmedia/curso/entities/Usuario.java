@@ -17,13 +17,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import br.com.caelum.stella.format.CPFFormatter;
 import br.com.caelum.stella.format.Formatter;
+import br.com.devmedia.curso.configuration.JacksonConfig;
 import br.com.devmedia.curso.type.PGEnumUserType;
 
 @Table(name = "usuario_rest",
@@ -59,9 +61,10 @@ public class Usuario implements Serializable {
 	@Size(min = 3, max = 50, message = "Campo requerido entre {min} e {max} caracteres")
 	@Column(name = "nm_usrmae_usr")
 	private String nomeMae;
-	
+    
 	@NotNull(message = "O Campo data de nascimento é requerido.")
-	@DateTimeFormat(iso = ISO.DATE)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = JacksonConfig.DEFAULT_DATE_FORMAT)
 	@Column(nullable = false, name = "dt_usrnas_usr")
     private LocalDate dtNascimento;
 	
