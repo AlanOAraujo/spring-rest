@@ -25,9 +25,15 @@ public class UsuarioService implements UsuarioInterfaceService{
     }
 
     @Override
-    public void editar(Long id) {
-        Usuario usuario = this.getId(id);
-        usuarioDAO.update(usuario);
+    public void editar(Long id, Usuario usuario) {
+        Usuario usuarioCadastrado = this.getId(id);
+
+        usuarioCadastrado.setNome(usuario.getNome());
+        usuarioCadastrado.setNomeMae(usuario.getNomeMae());
+        usuarioCadastrado.setDtNascimento(usuario.getDtNascimento());
+        usuarioCadastrado.setSexo(usuario.getSexo());
+
+        usuarioDAO.update(usuarioCadastrado);
     }
 
     @Override

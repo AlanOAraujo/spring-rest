@@ -73,12 +73,10 @@ public class Usuario implements Serializable {
 	@Column(nullable = false, name = "sexo")
     private TipoSexo sexo;
 
+    public Usuario(){}
+
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -162,5 +160,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "Usuario [cd_cpf=" + cd_cpf + ", nome=" + nome + ", nomeMae=" + nomeMae + "]";
     }
-    
+
 }

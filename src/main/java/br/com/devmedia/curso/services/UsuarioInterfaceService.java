@@ -12,7 +12,7 @@ public interface UsuarioInterfaceService {
 
     void salvar(Usuario usuario);
  
-    void editar(Long id);
+    void editar(Long id, Usuario usuario);
  
     void excluir(Long id);
  
