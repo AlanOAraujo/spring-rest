@@ -12,9 +12,9 @@ import org.hibernate.type.EnumType;
  */
 public class PGEnumUserType extends EnumType {
 
-    private static final long serialVersionUID = 1395377893410781999L;
+	private static final long serialVersionUID = -7987483586905330465L;
 
-    @Override
+	@Override
 	public void nullSafeSet(PreparedStatement st, Object value, int index, SharedSessionContractImplementor session)
 			throws HibernateException, SQLException {
 
