@@ -1,5 +1,6 @@
 package br.com.devmedia.curso.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,14 @@ import br.com.devmedia.curso.repository.UsuarioInterfaceDAO;
 /**
  * UsuarioService
  */
-//Essa Annotation, marca a classe como um bean gerenciavel pelo Spring, mais do tipo Regra de Negócio
+// Essa Annotation, marca a classe como um bean gerenciavel pelo Spring, mais do
+// tipo Regra de Negócio
 @Service
-public class UsuarioService implements UsuarioInterfaceService{
+public class UsuarioService implements UsuarioInterfaceService {
 
     @Autowired
     private UsuarioInterfaceDAO usuarioDAO;
-    
+
     @Override
     public void salvar(Usuario usuario) {
         usuarioDAO.save(usuario);
@@ -59,6 +61,18 @@ public class UsuarioService implements UsuarioInterfaceService{
     @Override
     public List<Usuario> getByNome(String nome) {
         return usuarioDAO.findByNome(nome);
+    }
+
+    @Override
+    public Usuario updateDtNascimento(Long id, LocalDate dt_nascimento) {
+        
+        Usuario usuario = usuarioDAO.findById(id);
+
+        usuario.setDtNascimento(dt_nascimento);
+
+        this.editar(id, usuario);
+
+        return usuario;
     }
     
 }

@@ -1,5 +1,6 @@
 package br.com.devmedia.curso.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import br.com.devmedia.curso.entities.TipoSexo;
@@ -23,5 +24,7 @@ public interface UsuarioInterfaceService {
     List<Usuario> getBySexo(TipoSexo sexo);
 
     List<Usuario> getByNome(String nome);
+
+    Usuario updateDtNascimento(Long id, LocalDate dt_nascimento);
 
 }
