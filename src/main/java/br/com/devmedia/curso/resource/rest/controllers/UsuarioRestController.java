@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,7 +39,7 @@ public class UsuarioRestController {
         return service.getTodos();
     }
 
-    //COm a anotação @PostMapping estamos informando que esta metodo só irá efetuar requesicoes do tipo post
+    //COm a anotação @PostMapping estamos informando que este metodo só irá efetuar requisicoes do tipo post
     /*O RequestBody faz com que já recebemos o proprio objeto informado, Assim já estamos recebendo o objeto usuario pronto 
     não parte por parte dele*/
     @PostMapping
@@ -66,6 +68,26 @@ public class UsuarioRestController {
         service.editar(id, usuario);
 
         return usuario;
+    }
+
+    /**O Patch, é importante quando estamos querendo apenas atualizar uma parte de nosso registro. */
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Usuario atualizarDtNascimento(@PathVariable("id") Long id, @RequestBody Usuario usuario){
+
+        return service.updateDtNascimento(id, usuario.getDtNascimento());
+
+    }
+
+    /**Sempre que formos excluir um dado, precisamos utilizar como responseStatus o HttpStatus.NO_CONTENT
+     * Pois seu returno não irá incluir nada no corpo da resposta. 
+     */
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void excluir(@PathVariable("id") Long id){
+
+        service.excluir(id);
+
     }
 
 }
