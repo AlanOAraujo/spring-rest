@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.devmedia.curso.entities.TipoSexo;
 import br.com.devmedia.curso.entities.Usuario;
+import br.com.devmedia.curso.exception.NaoExisteDAOException;
+import net.bytebuddy.implementation.bytecode.Throw;
 
 @Repository
 @Transactional
@@ -53,14 +55,12 @@ public class UsuarioDAO implements UsuarioInterfaceDAO{
 
 		TypedQuery<Usuario> query = entityManager.createQuery(criteria);
 
-		Usuario usuario = null;
-
 		try {
-			usuario = query.getSingleResult();
+			return query.getSingleResult();
 		}
-		catch (NoResultException ex) {}
-				
-		return usuario;
+		catch (NoResultException ex) {
+            throw new NaoExisteDAOException("Não existe Registro");
+        }
     }
 
     //Essa Transactional informa para o gerenciador que este metodo, é apenas leitura. Por isso o readOnly
