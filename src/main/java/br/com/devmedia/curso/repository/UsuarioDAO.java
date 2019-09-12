@@ -3,6 +3,7 @@ package br.com.devmedia.curso.repository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -38,7 +39,12 @@ public class UsuarioDAO implements UsuarioInterfaceDAO{
 
     @Override
     public void remove(Long id) {
-        entityManager.remove(entityManager.getReference(Usuario.class, id));
+        try {
+			entityManager.remove(entityManager.getReference(Usuario.class, id));
+		}
+		catch (EntityNotFoundException ex) {
+            throw new NaoExisteDAOException("Não existe Registro com o id "+ id);
+        }
     }
 
     @Override
@@ -59,7 +65,7 @@ public class UsuarioDAO implements UsuarioInterfaceDAO{
 			return query.getSingleResult();
 		}
 		catch (NoResultException ex) {
-            throw new NaoExisteDAOException("Não existe Registro");
+            throw new NaoExisteDAOException("Não existe Registro com o id "+ id);
         }
     }
 

@@ -27,13 +27,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternal(
             ex, DetalheErro.builder()
-                .addDetalhe("Uma exceção foi lançada.")
+                .addDetalhe("Recurso não encontrado na base de dados.")
                 .addErro(ex.getMessage())
-                .addStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                .addStatus(HttpStatus.NOT_FOUND)
                 .addHttpMethod(getHttpMethod(request))
                 .addPath(getPath(request))
                 .build(),
-             new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+             new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 
     }
 
