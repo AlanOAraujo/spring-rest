@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.devmedia.curso.entities.TipoSexo;
 import br.com.devmedia.curso.entities.Usuario;
 import br.com.devmedia.curso.exception.NaoExisteDAOException;
-import net.bytebuddy.implementation.bytecode.Throw;
 
 @Repository
 @Transactional
