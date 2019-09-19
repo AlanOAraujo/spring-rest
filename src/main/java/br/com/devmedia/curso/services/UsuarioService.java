@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.devmedia.curso.entities.TipoSexo;
 import br.com.devmedia.curso.entities.Usuario;
+import br.com.devmedia.curso.exception.IdNaoValidoServiceException;
 import br.com.devmedia.curso.repository.UsuarioInterfaceDAO;
 
 /**
@@ -28,7 +29,7 @@ public class UsuarioService implements UsuarioInterfaceService {
 
     @Override
     public void editar(Long id, Usuario usuario) {
-        Usuario usuarioCadastrado = this.getId(id);
+        Usuario usuarioCadastrado = this.getId(idValido(id));
 
         usuarioCadastrado.setNome(usuario.getNome());
         usuarioCadastrado.setNomeMae(usuario.getNomeMae());
@@ -40,12 +41,12 @@ public class UsuarioService implements UsuarioInterfaceService {
 
     @Override
     public void excluir(Long id) {
-        usuarioDAO.remove(id);
+        usuarioDAO.remove(idValido(id));
     }
 
     @Override
     public Usuario getId(Long id) {
-        return usuarioDAO.findById(id);
+        return usuarioDAO.findById(idValido(id));
     }
 
     @Override
@@ -66,13 +67,22 @@ public class UsuarioService implements UsuarioInterfaceService {
     @Override
     public Usuario updateDtNascimento(Long id, LocalDate dt_nascimento) {
         
-        Usuario usuario = usuarioDAO.findById(id);
+        Usuario usuario = usuarioDAO.findById(idValido(id));
 
         usuario.setDtNascimento(dt_nascimento);
 
         this.editar(id, usuario);
 
         return usuario;
+    }
+
+    private Long idValido(Long id){
+
+        if(id <= 0){
+            throw new IdNaoValidoServiceException("Valor do campo id está invalido." +
+            "Deve ser um valor inteiro maior que zero");
+        }
+        return id;
     }
     
 }
