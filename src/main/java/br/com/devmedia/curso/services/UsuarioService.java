@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.devmedia.curso.entities.TipoSexo;
 import br.com.devmedia.curso.entities.Usuario;
 import br.com.devmedia.curso.exception.IdNaoValidoServiceException;
+import br.com.devmedia.curso.repository.UsuarioDAO;
 import br.com.devmedia.curso.repository.UsuarioInterfaceDAO;
 
 /**
@@ -20,7 +21,7 @@ import br.com.devmedia.curso.repository.UsuarioInterfaceDAO;
 public class UsuarioService implements UsuarioInterfaceService {
 
     @Autowired
-    private UsuarioInterfaceDAO usuarioDAO;
+    private UsuarioDAO usuarioDAO;
 
     @Override
     public void salvar(Usuario usuario) {
